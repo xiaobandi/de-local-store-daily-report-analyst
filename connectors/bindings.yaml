@@ -1,0 +1,32 @@
+version: 1.0.0
+employee: de-local-store-daily-report-analyst
+policy:
+  default_access: read-only
+  write_requires_human: true
+  credential_location: 环境变量（如 ${conn_reddit_token}），不得写入仓库
+  audit: 每次调用记录到 logs/connector-audit.jsonl（不入 Git）
+bindings:
+- id: conn_llm_inference
+  name: LLM 推理 API
+  category: 运行层
+  provider: 多供应商可替换（开源/低价模型兜底 + 商用 API 分层）
+  access: read
+  scope: global
+  human_confirm_required: true
+  human_confirm_reason: 所有写操作与对外发布一律人工确认后执行
+  compliance_boundary: 不做模型选型锁定；模型是可替换燃料
+  mock_fallback: 本地小模型 / 规则模板
+  status: unbound
+  note: 凭证由部署方注入环境变量，绝不入库
+- id: conn_publish_endpoint
+  name: 平台发布端点（Coze/Dify/WorkBuddy）
+  category: 分发
+  provider: 智能体平台导入接口
+  access: write_reserved
+  scope: global
+  human_confirm_required: true
+  human_confirm_reason: 所有写操作与对外发布一律人工确认后执行
+  compliance_boundary: 资产以标准 SKILL.md / manifest 格式导入；不绑定单一平台
+  mock_fallback: 手动复制导入
+  status: unbound
+  note: 凭证由部署方注入环境变量，绝不入库

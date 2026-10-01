@@ -1,0 +1,18 @@
+repo: de-local-store-daily-report-analyst
+core:
+  repo: agent-skills-core
+  version: 1.0.0
+  tag: v1.0.0
+dependencies:
+- skill: brief-generator
+  name: 简报生成
+  source: agent-skills-core@1.0.0
+  kind: skill
+  required: true
+- skill: data-ingest-adapter
+  name: 数据对接
+  source: agent-skills-core@1.0.0
+  kind: spec
+  required: true
+  note: 只发 Spec + Mock + 权限声明，实现留在本仓绑定层
+resolution_rule: 员工仓库对 core 只做 external_dependency 引用，不内联复制 SKILL.md 正文

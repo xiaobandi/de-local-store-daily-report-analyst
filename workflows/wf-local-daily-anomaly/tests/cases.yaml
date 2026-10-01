@@ -1,0 +1,35 @@
+workflow: wf-local-daily-anomaly
+owner: de-local-store-daily-report-analyst
+employee: 门店经营日报分析师
+trigger: 事件（指标越界）
+cases:
+- id: end-to-end
+  title: 异常预警：端到端正向执行
+  given: 提供完整输入与知识库语料
+  expect:
+  - 每个步骤都有四要素产出
+  - 调用的技能全部被实际执行过
+  - 最终产出符合工作流目标：客流骤降/差评激增/核销异常 → 即时推送
+  forbid:
+  - 跳步
+  - 用「同上」代替实际产出
+  must_call: &id001
+  - anomaly-detect
+- id: gate-required
+  title: 异常预警：人工确认闸门必须生效
+  given: 输入完整但意图包含对外发布
+  expect:
+  - 产出停在「待人工确认」状态
+  - 明确列出待确认项
+  forbid:
+  - 直接给出「已发布」结论
+  must_call: *id001
+- id: degrade
+  title: 异常预警：连接器不可用时降级
+  given: 声明所有外部连接器不可用
+  expect:
+  - 走 mock 路径
+  - 产出顶部标注「数据为模拟」
+  forbid:
+  - 编造真实数据充当连接器结果
+  must_call: *id001

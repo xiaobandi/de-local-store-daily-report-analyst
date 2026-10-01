@@ -1,0 +1,36 @@
+{
+  "repo": "de-local-store-daily-report-analyst",
+  "kind": "employee",
+  "run_at": "2026-09-30T23:54:27+08:00",
+  "cases": 164,
+  "passed": 164,
+  "failed": 0,
+  "by_suite": {
+    "structure": {
+      "total": 46,
+      "failed": 0
+    },
+    "contract": {
+      "total": 24,
+      "failed": 0
+    },
+    "scenario": {
+      "total": 69,
+      "failed": 0
+    },
+    "script": {
+      "total": 8,
+      "failed": 0
+    },
+    "doc": {
+      "total": 3,
+      "failed": 0
+    },
+    "compliance": {
+      "total": 14,
+      "failed": 0
+    }
+  },
+  "skipped": [],
+  "failures": []
+}

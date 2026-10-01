@@ -1,0 +1,88 @@
+apiVersion: digital-employee/v1
+kind: DigitalEmployee
+metadata:
+  id: de_local_store_daily_report_analyst
+  name: 门店经营日报分析师
+  alias: null
+  repo: de-local-store-daily-report-analyst
+  card_no: 7.4.9 ⑧
+  group: local
+  group_label: 本地生活服务商家
+  phase: '**P0 首发**（承担获客与激活职能）'
+  complexity: '**S**（Mock 形态纯提示词）'
+  score: 18
+  price: '**免费开放（钩子资产）**；付费版 50–150 元/月（自动数据对接版）；代配置服务加成：0–200 元/次（数据对接代办，故意压低以换取转化漏斗入口）'
+  channels:
+  - GitHub（必备，开源 Skill 引流主力）
+  - '**小红书/抖音**（"开店老板都在用的日报模板"内容钩子）'
+  - 豆包工作
+  - 千问办公
+  license: Proprietary
+  version: 1.0.0
+spec:
+  positioning: 每天打烊后一句话告诉老板"今天生意怎么样、明天注意什么"
+  users: 全部门店（受众最广）
+  boundary: '**做**：数据采集、日报生成、异常预警、周建议；**不做**：不做财务记账、不给投资级经营建议'
+  kpi: 日报推送准时率 100%（每晚 22:00）；老板阅读耗时 ≤1 分钟；异常预警召回率
+  roi_summary: 付费意愿弱但获客价值大：日报是老板每天唯一必看的推送，天然承载其他智能体的交叉销售入口
+  demand_refs:
+  - D06
+  - D02
+  - D27
+  demand_support: 充分
+  demand_evidence: 中
+runtime:
+  system_prompt: persona/system-prompt.md
+  boundary: persona/boundary.md
+  kpi: persona/kpi.md
+deliverables:
+  skills:
+  - slug: anomaly-detect
+    name: 异常检测
+    kind: private
+    path: skills/anomaly-detect
+    version: 1.0.0
+    maturity: implemented
+  workflows:
+  - slug: wf-local-daily-collect
+    name: 数据采集
+    path: workflows/wf-local-daily-collect
+    version: 1.0.0
+    phase: P0
+    calls:
+    - data-ingest-adapter
+  - slug: wf-local-daily-report
+    name: 日报生成
+    path: workflows/wf-local-daily-report
+    version: 1.0.0
+    phase: P0
+    calls:
+    - brief-generator
+  - slug: wf-local-daily-anomaly
+    name: 异常预警
+    path: workflows/wf-local-daily-anomaly
+    version: 1.0.0
+    phase: P0
+    calls:
+    - anomaly-detect
+  - slug: wf-local-daily-weekly-advice
+    name: 周建议
+    path: workflows/wf-local-daily-weekly-advice
+    version: 1.0.0
+    phase: P1
+    calls:
+    - brief-generator
+    - anomaly-detect
+  knowledge_base: kb/
+  connectors: connectors/bindings.yaml
+external_dependencies:
+- repo: agent-skills-core
+  version: 1.0.0
+  skills:
+  - brief-generator
+  resolution: external
+spec_only_dependencies:
+- repo: agent-skills-core
+  spec: specs/data-ingest-adapter.md
+  skill: data-ingest-adapter
+  why: 报告明确"数据采集连接器族不公共化为 SKILL"——开源侧只发 Spec + Mock + 权限声明
