@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>周建议 · 架构与流程图</title>
+<style>
+body{max-width:900px;margin:0 auto;padding:32px 20px;font:16px/1.75 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif;color:#1f2328}
+h1{font-size:28px;border-bottom:1px solid #e6e8eb;padding-bottom:12px}
+h2{font-size:21px;margin-top:32px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #e6e8eb;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f6f8fa}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-size:14px}
+pre{background:#f6f8fa;padding:14px;border-radius:6px;overflow:auto}
+blockquote{margin:12px 0;padding:8px 14px;border-left:3px solid #d0d7de;color:#57606a;background:#f6f8fa}
+</style></head><body>
+<h1>周建议 · 架构与流程图</h1>
+<h2>本工作流的四层结构</h2>
+<pre><code>
+flowchart TB
+  U["使用层：门店经营日报分析师 的使用者"]
+  T["触发层：周建议"]
+  X["执行层：2 个步骤"]
+  O["产出层：下周一个重点动作"]
+  U --&gt; T --&gt; X --&gt; O
+</code></pre>
+<table><thead><tr><th>层</th><th>内容</th></tr></thead><tbody>
+<tr><td>使用层</td><td>全部门店（受众最广）；员工定位：每天打烊后一句话告诉老板"今天生意怎么样、明天注意什么"</td></tr>
+<tr><td>触发层</td><td>关键词 / 显式点名「周建议」；触发方式：定时（每周一）</td></tr>
+<tr><td>执行层</td><td>周趋势 → 下周一个重点动作</td></tr>
+<tr><td>产出层</td><td>下周一个重点动作</td></tr>
+</tbody></table>
+<h2>执行流程</h2>
+<pre><code>
+flowchart LR
+  S1["1. 周趋势"]
+  S2["2. 下周一个重点动作"]
+  S1 --&gt; S2
+  G1{"G1 输入确认"}
+  G2{"G2 对外内容确认"}
+  S0 --&gt; G1
+  G1 --&gt; S1
+  S2 --&gt; G2
+</code></pre>
+<h2>步骤职责表</h2>
+<table><thead><tr><th>#</th><th>步骤</th><th>承担者</th><th>为什么</th></tr></thead><tbody>
+<tr><td>1</td><td>周趋势</td><td>模型</td><td>需要读懂语境，不可用固定规则替代</td></tr>
+<tr><td>2</td><td>下周一个重点动作</td><td>模型</td><td>需要读懂语境，不可用固定规则替代</td></tr>
+</tbody></table>
+<p>⚠️ 尚未补齐：图中的步骤来自注册表口径，未逐条实跑校验；实跑后请同步修订本页（<code>发布标准.md</code> 第六项：通读一遍，不得出现重复填充句）。</p>
+</body></html>

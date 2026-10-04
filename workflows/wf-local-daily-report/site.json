@@ -1,0 +1,15 @@
+{
+  "name": "wf-local-daily-report",
+  "title": "日报生成",
+  "kind": "workflow",
+  "owner": "de-local-store-daily-report-analyst",
+  "complexity": "S",
+  "phase": "P0",
+  "one_liner": "数据 → 一句话结论+三个关键数+一个行动建议",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}

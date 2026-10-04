@@ -1,36 +1,42 @@
 ---
-name: wf-local-daily-weekly-advice
+name: wf-local-daily-anomaly
 description: >-
-  门店经营日报分析师 的「周建议」工作流：周趋势 → 下周一个重点动作。触发方式：定时（每周一）。
-  当用户要完成「周建议」这件事、或触发了上述条件时使用。
+  门店经营日报分析师 的「异常预警」工作流：客流骤降/差评激增/核销异常 → 即时推送。触发方式：事件（指标越界）。
+  当用户要完成「异常预警」这件事、或触发了上述条件时使用。
 license: Proprietary
+compatibility: >-
+  需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
+  跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:
   author: PLATFORM
   version: "1.0.0"
   standard: agent-skills/v1
+  library: agent-skills-library
   layer: L2-workflow
   owner: de_local_store_daily_report_analyst
+  repo: de-local-store-daily-report-analyst
+  visibility: private_to_employee
+  delivery: employee
   complexity: S
-  phase: P1
-  source: new
+  phase: P0
+  source: library
 ---
 
-# 周建议
+# 异常预警
 
-> 归属：**门店经营日报分析师**（`de-local-store-daily-report-analyst`）　触发：定时（每周一）　
-> 复杂度 S　阶段 P1
+> 归属：**门店经营日报分析师**（`de-local-store-daily-report-analyst`）　触发：事件（指标越界）　
+> 复杂度 S　阶段 P0
 
 ## 一、这条工作流解决什么
 
-周趋势 → 下周一个重点动作
+客流骤降/差评激增/核销异常 → 即时推送
 
-**业务收益**：从"看数"升级为"给方向"
+**业务收益**：早一天发现异常=少一天失血
 
 ## 二、调用的 SKILL（必填列，逐条锁定版本）
 
 | 技能名 | slug | 来源仓 | 版本 |
 |---|---|---|---|
-| `简报生成` | `brief-generator` | core | v1.0.0 |
 | `异常检测` | `anomaly-detect` | 本仓 | v1.0.0 |
 
 > 公共技能来自 `agent-skills-core@1.0.0`，本仓库只做外部依赖引用，
@@ -38,16 +44,16 @@ metadata:
 
 ## 三、执行步骤（每步四要素齐备）
 
-### 步骤 1：周趋势
+### 步骤 1：客流骤降/差评激增/核销异常
 
-- **做**：周趋势
+- **做**：客流骤降/差评激增/核销异常
 - **输入来源**：用户提供的原始材料（工作流第 1 步没有「上一步」）/ 本员工知识库 `kb/` / 连接器只读数据；三者皆空时必须停在 G1 闸门
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 
-### 步骤 2：下周一个重点动作
+### 步骤 2：即时推送
 
-- **做**：下周一个重点动作
+- **做**：即时推送
 - **输入来源**：步骤 1 的产出 / 本员工知识库 `kb/` / 连接器只读数据
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式

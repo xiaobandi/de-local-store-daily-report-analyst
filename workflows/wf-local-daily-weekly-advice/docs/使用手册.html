@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>周建议 · 使用手册</title>
+<style>
+body{max-width:900px;margin:0 auto;padding:32px 20px;font:16px/1.75 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif;color:#1f2328}
+h1{font-size:28px;border-bottom:1px solid #e6e8eb;padding-bottom:12px}
+h2{font-size:21px;margin-top:32px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #e6e8eb;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f6f8fa}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-size:14px}
+pre{background:#f6f8fa;padding:14px;border-radius:6px;overflow:auto}
+blockquote{margin:12px 0;padding:8px 14px;border-left:3px solid #d0d7de;color:#57606a;background:#f6f8fa}
+</style></head><body>
+<h1>周建议 · 使用手册</h1>
+<blockquote>工作流 <code>wf-local-daily-weekly-advice</code>　·　归属 <strong>门店经营日报分析师</strong>（<code>de-local-store-daily-report-analyst</code>）　·　复杂度 S　·　阶段 P1</blockquote>
+<p><strong>一句话</strong>：周趋势 → 下周一个重点动作</p>
+<h2>一、装到各平台</h2>
+<table><thead><tr><th>平台</th><th>安装方式</th></tr></thead><tbody>
+<tr><td>WorkBuddy</td><td>把技能目录放到 <code>~/.workbuddy/skills/</code>，或直接在对话里说触发词</td></tr>
+<tr><td>ChatGPT</td><td>打包为 zip 后在 Skills 设置里上传（需支持 Skills 的版本）</td></tr>
+<tr><td>DeepSeek Harness</td><td><code>新建技能 安装:&lt;repo-url&gt;</code>，或把目录放进 harness 的 skills 目录</td></tr>
+<tr><td>Kimi Work</td><td>上传 zip 或放置到技能目录；Kimi Work 不保证自动触发，建议显式点名</td></tr>
+<tr><td>豆包工作</td><td><code>新建技能 安装:&lt;repo-url&gt;</code>，或在技能管理处上传 zip</td></tr>
+</tbody></table>
+<blockquote>本包是<strong>自包含</strong>目录：把 <code>wf-local-daily-weekly-advice/</code> 整个目录拷到平台的技能目录即可，不依赖兄弟目录。跨平台加载约定：<code>&lt;项目&gt;/.agents/skills/&lt;name&gt;/</code>、<code>~/.agents/skills/&lt;name&gt;/</code>，项目级覆盖用户级。</blockquote>
+<h3>装不上怎么办</h3>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>目录名与 <code>name</code> 不一致</td><td>本包目录名必须与 frontmatter 的 <code>name</code> 逐字相同（应为 <code>wf-local-daily-weekly-advice</code>），改名后平台才认得出</td></tr>
+<tr><td>放进去了但不触发</td><td>触发靠 <code>description</code>：先说关键词，或<strong>显式点名</strong>「用 周建议 处理这份材料」</td></tr>
+<tr><td>提示缺少脚本</td><td>本包不带 <code>scripts/</code>；该能力依赖本仓 <code>tools/</code> 下的共享脚本，请从仓库根运行</td></tr>
+<tr><td>中文乱码</td><td>以 UTF-8 打开；Windows 终端用 <code>chcp 65001</code></td></tr>
+</tbody></table>
+<h2>二、怎么触发它</h2>
+<ul>
+<li><strong>关键词触发</strong>：<code>wf wf-local-daily-weekly-advice</code>、<code>周建议</code></li>
+<li><strong>显式点名</strong>：「用「周建议」处理这份材料：&lt;粘贴或指向文件&gt;」</li>
+<li><strong>触发方式（注册表口径）</strong>：定时（每周一）</li>
+</ul>
+<blockquote>触发责任全部写在 <code>description</code> 里。关键词只是最省事的路径，意图吻合时也会触发。</blockquote>
+<h2>三、输入契约</h2>
+<p><strong>必需</strong>：</p>
+<ul>
+<li>本工作流的起始材料（见 <code>SKILL.md</code>「执行步骤」第 1 步）</li>
+<li>用户身份与目标平台/渠道</li>
+</ul>
+<p><strong>可选</strong>：</p>
+<ul>
+<li>历史产出</li>
+<li>账号人设</li>
+<li>渠道规则</li>
+<li>上一周期的数据</li>
+</ul>
+<p><strong>缺必需输入时的行为</strong>：停下来问，明确说出缺什么；<strong>不允许</strong>用假设补全。</p>
+<h2>四、产出长什么样</h2>
+<p>下周一个重点动作</p>
+<p>逐步产出：</p>
+<p>1. <strong>周趋势</strong> — 产出该步的结构化结果（四要素：输入来源 / 产出 / 依据与结论 / 未决·待填）</p>
+<p>2. <strong>下周一个重点动作</strong> — 产出该步的结构化结果（四要素：输入来源 / 产出 / 依据与结论 / 未决·待填）</p>
+<h2>五、依赖与运行环境</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>平台能力</td><td>读取工作区文件（必需）；执行代码、联网检索（可选，缺失时走降级路径）</td></tr>
+<tr><td>自带脚本</td><td>无（纯提示词技能，规则全部写在 <code>SKILL.md</code> 正文）</td></tr>
+<tr><td>外部依赖</td><td>无第三方包；不硬编码任何厂商接口</td></tr>
+<tr><td>知识库</td><td>本员工知识库 <code>kb/</code>（见 <code>de-local-store-daily-report-analyst/kb/README.md</code>）</td></tr>
+<tr><td>连接器</td><td>只读优先；写操作一律需人工确认（见本仓 <code>connectors/bindings.yaml</code>）</td></tr>
+</tbody></table>
+<h2>六、数据与权限声明</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>读取</td><td>工作区内用户提供的材料；本员工 <code>kb/</code> 语料</td></tr>
+<tr><td>写入</td><td>仅工作区产出文件；<strong>不写</strong>任何外部系统</td></tr>
+<tr><td>联网</td><td>默认不联网；需要外部事实时标注「需查证」交人工</td></tr>
+<tr><td>个人信息</td><td>手机号/地址/订单号等一律先脱敏再进入产出</td></tr>
+<tr><td>对外发布</td><td><strong>本工作流不代替人工点击发布</strong>，对外内容必须经人工确认闸门</td></tr>
+<tr><td>密钥</td><td>不接收、不存储、不落盘任何密钥</td></tr>
+</tbody></table>
+<h2>七、常见问题</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody>
+<tr><td>产出里出现 <code>&lt;待填&gt;</code></td><td>这是<strong>正确行为</strong>：输入里没有的数字不许估算，按「未决·待填」清单补材料后重跑</td></tr>
+<tr><td>和预期结果不一致</td><td>先核对输入是否落在「输入契约」范围内；范围外属不适用场景</td></tr>
+<tr><td>中途想改方向</td><td>停下来说明新目标；本工作流按新输入重跑，不在此基础上叠改</td></tr>
+</tbody></table>
+</body></html>
