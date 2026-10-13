@@ -17,7 +17,7 @@ metadata:
   - '**小红书/抖音**（"开店老板都在用的日报模板"内容钩子）'
   - 豆包工作
   - 千问办公
-  license: Proprietary
+  license: Apache-2.0
   version: 1.0.0
 spec:
   positioning: 每天打烊后一句话告诉老板"今天生意怎么样、明天注意什么"

@@ -3,7 +3,7 @@ name: wf-local-daily-weekly-advice
 description: >-
   门店经营日报分析师 的「周建议」工作流：周趋势 → 下周一个重点动作。触发方式：定时（每周一）。
   当用户要完成「周建议」这件事、或触发了上述条件时使用。
-license: Proprietary
+license: Apache-2.0
 compatibility: >-
   需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
   跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。

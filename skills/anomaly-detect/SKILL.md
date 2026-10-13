@@ -2,7 +2,7 @@
 name: anomaly-detect
 description: >-
   对经营指标序列做偏离、突变、趋势三类检测，输出可解释的预警，供日报与运营中台共用。当用户提到异常检测、数据异常、预警、指标异动、anomaly detection、metric alert 时使用——即使用户没有直接说出上述关键词，只要意图吻合也应触发。
-license: Proprietary
+license: Apache-2.0
 compatibility: >-
   需要能读取工作区文件。若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:
